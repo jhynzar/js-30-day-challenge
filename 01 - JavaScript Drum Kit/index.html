@@ -62,11 +62,26 @@
     <script>
         window.addEventListener('keydown', (e) => {
             let audio = document.querySelector(`audio[data-code='${e.code}']`);
+            let key = document.querySelector(`.key[data-code='${e.code}']`);
             
             if(!audio) return; //If pressed key does not have a corresponding audio
+            
+            //Play Audio
             audio.currentTime = 0;
             audio.play();
+
+            //Animate
+            key.classList.add('playing');
         })
+        let keys = document.querySelectorAll('.key');
+        keys.forEach((key) => {
+            key.addEventListener('transitionend', (e) => {
+                //It will only be called if the transition "transform" ended
+                //Known Bugs, it will prevent the removing of class "playing" when button is "pressed down"
+                //if(e.propertyName !== 'transform') return; 
+                e.target.classList.remove('playing');
+            });
+        });
     </script>
 
 
