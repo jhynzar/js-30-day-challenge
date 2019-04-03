@@ -14,6 +14,8 @@
       <div class="hand hour-hand"></div>
       <div class="hand min-hand"></div>
       <div class="hand second-hand"></div>
+      
+      <div id="handHolder"></div>
     </div>
   </div>
 
@@ -66,8 +68,46 @@
       position: absolute;
       top: 50%;
       transform: rotate(90deg);
-      transform-origin: 100%;
+      transform-origin: right;
       transition: all 0.5s cubic-bezier(0, 1.37, 0.28, 0.76);
+
+      border-top-right-radius: 2px;
+      border-bottom-right-radius: 2px;
+    }
+
+    .second-hand {
+      height: 1%;
+      top: 49.5%;
+    }
+
+    .min-hand {
+      height: 3%;
+      top: 48.5%;
+      width: 45%;
+      left: 5%;
+    }
+
+    .hour-hand {
+      height: 5%;
+      top: 47.5%;
+      width: 25%;
+      left: 25%;
+    }
+
+    #handHolder {
+      height: 8%;
+      width: 8%;
+      background: white;
+      top: 46%;
+      left: 46%;
+      transform-origin: center;
+      position: absolute;
+      border-radius: 50%;
+
+      box-shadow:
+        0 0 0 4px rgba(0, 0, 0, 0.1),
+        inset 0 0 0 3px #EFEFEF,
+        0 0 10px rgba(0, 0, 0, 0.2);
     }
   </style>
   <script>
