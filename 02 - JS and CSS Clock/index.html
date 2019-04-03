@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>JS + CSS Clock</title>
+</head>
+
+<body>
+
+
+  <div class="clock">
+    <div class="clock-face">
+      <div class="hand hour-hand"></div>
+      <div class="hand min-hand"></div>
+      <div class="hand second-hand"></div>
+
+      <div id="handHolder"></div>
+
+      <div id="clock-digital">
+          <span class="clock-digital-hour">00</span>:<span class="clock-digital-min">00</span>:<span class="clock-digital-second">00</span>
+      </div>
+
+      <div class="clock-time">
+        <div id="timeNumber1" class="clock-time-number"><span>1</span></div>
+        <div id="timeNumber2" class="clock-time-number"><span>2</span></div>
+        <div id="timeNumber3" class="clock-time-number"><span>3</span></div>
+        <div id="timeNumber4" class="clock-time-number"><span>4</span></div>
+        <div id="timeNumber5" class="clock-time-number"><span>5</span></div>
+        <div id="timeNumber6" class="clock-time-number"><span>6</span></div>
+        <div id="timeNumber7" class="clock-time-number"><span>7</span></div>
+        <div id="timeNumber8" class="clock-time-number"><span>8</span></div>
+        <div id="timeNumber9" class="clock-time-number"><span>9</span></div>
+        <div id="timeNumber10" class="clock-time-number"><span>10</span></div>
+        <div id="timeNumber11" class="clock-time-number"><span>11</span></div>
+        <div id="timeNumber12" class="clock-time-number"><span>12</span></div>
+      </div>
+
+    </div>
+  </div>
+
+  
+
+
+  <style>
+    html {
+      background: #018DED url(http://unsplash.it/1500/1000?image=881&blur=50);
+      background-size: cover;
+      font-family: 'helvetica neue';
+      text-align: center;
+      font-size: 10px;
+    }
+
+    body {
+      margin: 0;
+      font-size: 2rem;
+      display: flex;
+      flex: 1;
+      min-height: 100vh;
+      align-items: center;
+    }
+
+    .no-transition {
+      transition: none !important;
+    }
+
+    .clock {
+      width: 30rem;
+      height: 30rem;
+      border: 20px solid white;
+      border-radius: 50%;
+      margin: 50px auto;
+      position: relative;
+      padding: 2rem;
+      box-shadow:
+        0 0 0 4px rgba(0, 0, 0, 0.1),
+        inset 0 0 0 3px #EFEFEF,
+        inset 0 0 10px black,
+        0 0 10px rgba(0, 0, 0, 0.2);
+    }
+
+    #clock-digital {
+      height: 12%;
+      width: 30%;
+      background: white;
+      top: 70%;
+      left: 35%;
+      transform-origin: center;
+      position: absolute;
+      border-radius: 25% 10%;
+      justify-content: center;
+
+      display: flex;
+      align-items: center;
+
+      box-shadow:
+        0 0 0 4px rgba(0,0,0,0.1),
+        inset 0 0 0 3px #EFEFEF,
+        inset 0 0 5px black,
+        0 0 10px rgba(0,0,0,0.2);
+    }
+
+    .clock-face {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transform: translateY(-3px);
+      /* account for the height of the clock hands */
+    }
+
+    .hand {
+      width: 50%;
+      height: 6px;
+      background: black;
+      position: absolute;
+      top: 50%;
+      transform: rotate(90deg);
+      transform-origin: right;
+      transition: all 0.5s cubic-bezier(0, 1.37, 0.28, 0.76);
+
+      border-top-right-radius: 2px;
+      border-bottom-right-radius: 2px;
+    }
+
+    .second-hand {
+      height: 1%;
+      top: 49.5%;
+    }
+
+    .min-hand {
+      height: 3%;
+      top: 48.5%;
+      width: 45%;
+      left: 5%;
+    }
+
+    .hour-hand {
+      height: 5%;
+      top: 47.5%;
+      width: 25%;
+      left: 25%;
+    }
+
+    #handHolder {
+      height: 8%;
+      width: 8%;
+      background: white;
+      top: 46%;
+      left: 46%;
+      transform-origin: center;
+      position: absolute;
+      border-radius: 50%;
+
+      box-shadow:
+        0 0 0 4px rgba(0, 0, 0, 0.1),
+        inset 0 0 0 3px #EFEFEF,
+        0 0 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .clock-time {
+      text-align: left;
+    }
+
+    .clock-time-number {
+      position: absolute;
+      top: 45%;
+      height: 10%;
+      width: 50%;
+      display: flex;
+      align-items: center;
+      
+      transform-origin: right center;
+    }
+
+    .clock-time-number > span {
+      position: absolute;
+    }
+
+    #timeNumber1 {
+      transform: rotate(120deg);
+    }
+
+    #timeNumber1 > span {
+      transform: rotate(-120deg);
+    }
+
+    #timeNumber2 {
+      transform: rotate(150deg);
+    }
+
+    #timeNumber2 > span {
+      transform: rotate(-150deg);
+    }
+
+    #timeNumber3 {
+      transform: rotate(180deg);
+    }
+
+    #timeNumber3 > span {
+      transform: rotate(-180deg);
+    }
+
+    #timeNumber4 {
+      transform: rotate(210deg);
+    }
+
+    #timeNumber4 > span {
+      transform: rotate(-210deg);
+    }
+
+    #timeNumber5 {
+      transform: rotate(240deg);
+    }
+
+    #timeNumber5 > span {
+      transform: rotate(-240deg);
+    }
+
+    #timeNumber6 {
+      transform: rotate(270deg);
+    }
+
+    #timeNumber6 > span {
+      transform: rotate(-270deg);
+    }
+
+    #timeNumber7 {
+      transform: rotate(300deg);
+    }
+
+    #timeNumber7 > span {
+      transform: rotate(-300deg);
+    }
+
+    #timeNumber8 {
+      transform: rotate(330deg);
+    }
+
+    #timeNumber8 > span {
+      transform: rotate(-330deg);
+    }
+
+    #timeNumber9 {
+      transform: rotate(0deg);
+    }
+
+    #timeNumber9 > span {
+      transform: rotate(0deg);
+    }
+
+    #timeNumber10 {
+      transform: rotate(30deg);
+    }
+
+    #timeNumber10 > span {
+      transform: rotate(-30deg);
+    }
+
+    #timeNumber11 {
+      transform: rotate(60deg);
+    }
+
+    #timeNumber11 > span {
+      transform: rotate(-60deg);
+    }
+
+    #timeNumber12 {
+      transform: rotate(90deg);
+    }
+
+    #timeNumber12 > span {
+      transform: rotate(-90deg);
+    }
+  </style>
+  <script>
+    const secondHand = document.querySelector('.second-hand');
+    const minHand = document.querySelector('.min-hand');
+    const hourHand = document.querySelector('.hour-hand');
+
+    const secondDigitalClock = document.querySelector('.clock-digital-second');
+    const minDigitalClock = document.querySelector('.clock-digital-min');
+    const hourDigitalClock = document.querySelector('.clock-digital-hour');
+
+    setInterval(() => {
+      const defaultHandDegrees = 90;
+      const now = new Date();
+      const second = now.getSeconds();
+      const minutes = now.getMinutes();
+      const hours = now.getHours();
+
+
+      let secondDegrees = ( (second / 60) * 360 ) + defaultHandDegrees;
+      let minDegrees = ( (minutes / 60) * 360 ) + ( (second / 60) * (360 / 60) ) + defaultHandDegrees;
+      let hourDegrees = ( ( ( (hours > 12) ? hours - 12 : hours) / 12) * 360 ) + ( (minutes / 60) * (360 / 12) ) + defaultHandDegrees;
+
+      //----------------------------------------------
+      // IF Hand has is at 1 tick before completion, continue with the next tick, don't reset it just yet (for transition)
+      //----------------------------------------------
+      //Check if degrees is default
+      //and set 360 + defaultHandDegrees (1 rotation) else continue
+      secondDegrees = (secondDegrees === defaultHandDegrees) ? 360 + defaultHandDegrees : secondDegrees;
+      minDegrees = (minDegrees === defaultHandDegrees) ? 360 + defaultHandDegrees : minDegrees;
+      hourDegrees = (hourDegrees === defaultHandDegrees) ? 360 + defaultHandDegrees : hourDegrees;
+      //----------------------------------------------
+
+      //Enable Transition
+      secondHand.classList.remove('no-transition');
+      minHand.classList.remove('no-transition');
+      hourHand.classList.remove('no-transition');
+
+      //Update Hand Degrees
+      secondHand.style.transform = `rotate(${secondDegrees}deg)`;
+      minHand.style.transform = `rotate(${minDegrees}deg)`;
+      hourHand.style.transform = `rotate(${hourDegrees}deg)`;
+
+      //Update Digital Clock
+      secondDigitalClock.innerHTML = (`${second}`.length > 1) ? second : `0${second}`;
+      minDigitalClock.innerHTML = (`${minutes}`.length > 1) ? minutes : `0${minutes}`;
+      hourDigitalClock.innerHTML = (`${hours}`.length > 1) ? hours : `0${hours}`;
+      
+    }, 1000);
+
+
+    //Degree Reset and Transition Disable
+    window.addEventListener('transitionend', (e) => {
+      if(e.propertyName === 'transform' && e.target.classList.contains('hand')) {
+        const rotateRegex = /rotate\((.+)deg\)/;
+        let rotateDegrees = rotateRegex.exec(e.target.style.transform)[1];
+        if(Number(rotateDegrees) >= 450) {
+          e.target.classList.add('no-transition');
+          e.target.style.transform = "rotate(90deg)";
+        }
+      }
+    });
+  </script>
+</body>
+
+</html>
