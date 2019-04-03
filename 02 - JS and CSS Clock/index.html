@@ -76,6 +76,7 @@
     const hourHand = document.querySelector('.hour-hand');
 
     setInterval(() => {
+      const defaultHandDegrees = 90;
       const now = new Date();
       const second = now.getSeconds();
       const minutes = now.getMinutes();
@@ -83,13 +84,57 @@
 
       console.log(second, minutes, hours);
 
-      const secondDegrees = ( (second / 60) * 360 ) + 90;
-      const minDegrees = ( (minutes / 60) * 360 ) + ( (second / 60) * (360 / 60) ) + 90;
-      const hourDegrees = ( (hours / 12) * 360 ) + ( (minutes / 60) * (360 / 12) ) + 90;
+      let secondDegrees = ( (second / 60) * 360 ) + defaultHandDegrees;
+      let minDegrees = ( (minutes / 60) * 360 ) + ( (second / 60) * (360 / 60) ) + defaultHandDegrees;
+      let hourDegrees = ( (hours / 12) * 360 ) + ( (minutes / 60) * (360 / 12) ) + defaultHandDegrees;
+
+      //----------------------------------------------
+      // IF Hand has is at 1 tick before completion, continue with the next tick, don't reset it just yet (for transition)
+      //----------------------------------------------
+      //Check if degrees is default
+      //and set 360 + defaultHandDegrees (1 rotation) else continue
+      secondDegrees = (secondDegrees === defaultHandDegrees) ? 360 + defaultHandDegrees : secondDegrees;
+      minDegrees = (minDegrees === defaultHandDegrees) ? 360 + defaultHandDegrees : minDegrees;
+      hourDegrees = (hourDegrees === defaultHandDegrees) ? 360 + defaultHandDegrees : hourDegrees;
+      //----------------------------------------------
+
+
 
       secondHand.style.transform = `rotate(${secondDegrees}deg)`;
       minHand.style.transform = `rotate(${minDegrees}deg)`;
       hourHand.style.transform = `rotate(${hourDegrees}deg)`;
+
+
+
+      //---------------------------------------------
+      // If it is at the base, Reset Degrees
+      //---------------------------------------------
+      //check if one has finished one rotation
+      if(
+        secondDegrees >= (360 + defaultHandDegrees) ||
+        minDegrees >= (360 + defaultHandDegrees) ||
+        hourDegrees >= (360 + defaultHandDegrees)
+      ){
+        //put transition to variable
+        const originalTransition = 'all 0.5s cubic-bezier(0, 1.37, 0.28, 0.76);';
+
+        //remove transition
+        secondHand.style.transitionProperty = `none`;
+        minHand.style.transitionProperty = `none`;
+        hourHand.style.transitionProperty = `none`;
+
+        //change to 90 degrees
+        secondHand.style.transform = `rotate(${(secondDegrees >= 360 + defaultHandDegrees) ? 90 : secondDegrees}deg)`;
+        minHand.style.transform = `rotate(${(minDegrees >= 360 + defaultHandDegrees) ? 90 : minDegrees}deg)`;
+        hourHand.style.transform = `rotate(${(hourDegrees >= 360 + defaultHandDegrees) ? 90 : hourDegrees}deg)`;
+
+        //add transition again
+        secondHand.style.transitionProperty = originalTransition;
+        minHand.style.transitionProperty = originalTransition;
+        hourHand.style.transitionProperty = originalTransition;
+      }
+      //--------------------------------------------
+      
     }, 1000);
   </script>
 </body>
