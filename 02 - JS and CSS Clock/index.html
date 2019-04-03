@@ -16,8 +16,12 @@
       <div class="hand second-hand"></div>
 
       <div id="handHolder"></div>
+
+      <div id="clock-digital">
+          <span class="clock-digital-hour">00</span>:<span class="clock-digital-min">00</span>:<span class="clock-digital-second">00</span>
+      </div>
+
       <div class="clock-time">
-        
         <div id="timeNumber1" class="clock-time-number"><span>1</span></div>
         <div id="timeNumber2" class="clock-time-number"><span>2</span></div>
         <div id="timeNumber3" class="clock-time-number"><span>3</span></div>
@@ -31,8 +35,11 @@
         <div id="timeNumber11" class="clock-time-number"><span>11</span></div>
         <div id="timeNumber12" class="clock-time-number"><span>12</span></div>
       </div>
+
     </div>
   </div>
+
+  
 
 
   <style>
@@ -70,6 +77,27 @@
         inset 0 0 0 3px #EFEFEF,
         inset 0 0 10px black,
         0 0 10px rgba(0, 0, 0, 0.2);
+    }
+
+    #clock-digital {
+      height: 12%;
+      width: 30%;
+      background: white;
+      top: 70%;
+      left: 35%;
+      transform-origin: center;
+      position: absolute;
+      border-radius: 25% 10%;
+      justify-content: center;
+
+      display: flex;
+      align-items: center;
+
+      box-shadow:
+        0 0 0 4px rgba(0,0,0,0.1),
+        inset 0 0 0 3px #EFEFEF,
+        inset 0 0 5px black,
+        0 0 10px rgba(0,0,0,0.2);
     }
 
     .clock-face {
@@ -249,6 +277,10 @@
     const minHand = document.querySelector('.min-hand');
     const hourHand = document.querySelector('.hour-hand');
 
+    const secondDigitalClock = document.querySelector('.clock-digital-second');
+    const minDigitalClock = document.querySelector('.clock-digital-min');
+    const hourDigitalClock = document.querySelector('.clock-digital-hour');
+
     setInterval(() => {
       const defaultHandDegrees = 90;
       const now = new Date();
@@ -281,6 +313,11 @@
       secondHand.style.transform = `rotate(${secondDegrees}deg)`;
       minHand.style.transform = `rotate(${minDegrees}deg)`;
       hourHand.style.transform = `rotate(${hourDegrees}deg)`;
+
+      //Update Digital Clock
+      secondDigitalClock.innerHTML = (`${second}`.length > 1) ? second : `0${second}`;
+      minDigitalClock.innerHTML = (`${minutes}`.length > 1) ? minutes : `0${minutes}`;
+      hourDigitalClock.innerHTML = (`${hours}`.length > 1) ? hours : `0${hours}`;
       
     }, 1000);
 
