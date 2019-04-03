@@ -84,8 +84,8 @@
       console.log(second, minutes, hours);
 
       const secondDegrees = ( (second / 60) * 360 ) + 90;
-      const minDegrees = ( (minutes / 60) * 360 ) + 90;
-      const hourDegrees = ( (hours / 24) * 360 ) + 90;
+      const minDegrees = ( (minutes / 60) * 360 ) + ( (second / 60) * (360 / 60) ) + 90;
+      const hourDegrees = ( (hours / 24) * 360 ) + ( (minutes / 60) * (360 / 24) ) + 90;
 
       secondHand.style.transform = `rotate(${secondDegrees}deg)`;
       minHand.style.transform = `rotate(${minDegrees}deg)`;
