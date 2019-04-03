@@ -14,8 +14,23 @@
       <div class="hand hour-hand"></div>
       <div class="hand min-hand"></div>
       <div class="hand second-hand"></div>
-      
+
       <div id="handHolder"></div>
+      <div class="clock-time">
+        
+        <div id="timeNumber1" class="clock-time-number"><span>1</span></div>
+        <div id="timeNumber2" class="clock-time-number"><span>2</span></div>
+        <div id="timeNumber3" class="clock-time-number"><span>3</span></div>
+        <div id="timeNumber4" class="clock-time-number"><span>4</span></div>
+        <div id="timeNumber5" class="clock-time-number"><span>5</span></div>
+        <div id="timeNumber6" class="clock-time-number"><span>6</span></div>
+        <div id="timeNumber7" class="clock-time-number"><span>7</span></div>
+        <div id="timeNumber8" class="clock-time-number"><span>8</span></div>
+        <div id="timeNumber9" class="clock-time-number"><span>9</span></div>
+        <div id="timeNumber10" class="clock-time-number"><span>10</span></div>
+        <div id="timeNumber11" class="clock-time-number"><span>11</span></div>
+        <div id="timeNumber12" class="clock-time-number"><span>12</span></div>
+      </div>
     </div>
   </div>
 
@@ -108,6 +123,119 @@
         0 0 0 4px rgba(0, 0, 0, 0.1),
         inset 0 0 0 3px #EFEFEF,
         0 0 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .clock-time {
+      text-align: left;
+    }
+
+    .clock-time-number {
+      position: absolute;
+      top: 45%;
+      height: 10%;
+      width: 50%;
+      
+      transform-origin: right center;
+    }
+
+    .clock-time-number > span {
+      position: absolute;
+    }
+
+    #timeNumber1 {
+      transform: rotate(120deg);
+    }
+
+    #timeNumber1 > span {
+      transform: rotate(-120deg);
+    }
+
+    #timeNumber2 {
+      transform: rotate(150deg);
+    }
+
+    #timeNumber2 > span {
+      transform: rotate(-150deg);
+    }
+
+    #timeNumber3 {
+      transform: rotate(180deg);
+    }
+
+    #timeNumber3 > span {
+      transform: rotate(-180deg);
+    }
+
+    #timeNumber4 {
+      transform: rotate(210deg);
+    }
+
+    #timeNumber4 > span {
+      transform: rotate(-210deg);
+    }
+
+    #timeNumber5 {
+      transform: rotate(240deg);
+    }
+
+    #timeNumber5 > span {
+      transform: rotate(-240deg);
+    }
+
+    #timeNumber6 {
+      transform: rotate(270deg);
+    }
+
+    #timeNumber6 > span {
+      transform: rotate(-270deg);
+    }
+
+    #timeNumber7 {
+      transform: rotate(300deg);
+    }
+
+    #timeNumber7 > span {
+      transform: rotate(-300deg);
+    }
+
+    #timeNumber8 {
+      transform: rotate(330deg);
+    }
+
+    #timeNumber8 > span {
+      transform: rotate(-330deg);
+    }
+
+    #timeNumber9 {
+      transform: rotate(0deg);
+    }
+
+    #timeNumber9 > span {
+      transform: rotate(0deg);
+    }
+
+    #timeNumber10 {
+      transform: rotate(30deg);
+    }
+
+    #timeNumber10 > span {
+      transform: rotate(-30deg);
+    }
+
+    #timeNumber11 {
+      transform: rotate(60deg);
+    }
+
+    #timeNumber11 > span {
+      transform: rotate(-60deg);
+    }
+
+    #timeNumber12 {
+      transform: rotate(90deg);
+    }
+
+    #timeNumber12 > span {
+      transform: rotate(-90deg);
     }
   </style>
   <script>
