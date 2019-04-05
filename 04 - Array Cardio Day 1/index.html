@@ -98,31 +98,37 @@
       'Blair, Tony', 'Blake, William'
     ];
 
+    console.log(`%cExercise 1`,'display: block; font-size: 1.5rem; font-weight: bold;');
     // Array.prototype.filter()
     // 1. Filter the list of inventors for those who were born in the 1500's
     const fifteen = inventors.filter((inventor) => (inventor.year >= 1500 && inventor.year < 1600) );
     console.table(fifteen);
 
+    console.log(`%cExercise 2`,'display: block; font-size: 1.5rem; font-weight: bold;');
     // Array.prototype.map()
     // 2. Give us an array of the inventors' first and last names
     const fullNames = inventors.map((inventor) => `${inventor.first} ${inventor.last}`);
     console.table(fullNames);
 
+    console.log(`%cExercise 3`,'display: block; font-size: 1.5rem; font-weight: bold;');
     // Array.prototype.sort()
     // 3. Sort the inventors by birthdate, oldest to youngest
     const birthOrdered = inventors.sort((a, b) => ( (a.year < b.year) ? -1 : 1 ) );
     console.table(birthOrdered);
 
+    console.log(`%cExercise 4`,'display: block; font-size: 1.5rem; font-weight: bold;');
     // Array.prototype.reduce()
     // 4. How many years did all the inventors live?
     const lived = inventors.reduce((acc, inventor) => acc += (inventor.passed - inventor.year) , 0);
     console.log(`All inventors lived for %c${lived} years.`,'font-weight: bold; text-decoration: underline;');
 
+    console.log(`%cExercise 5`,'display: block; font-size: 1.5rem; font-weight: bold;');
     // 5. Sort the inventors by years lived
     const ageOrdered = inventors.sort((a, b) => ( ((a.passed - a.year) > (b.passed - b.year)) ? -1 : 1 ) );
     console.table(ageOrdered);
     console.log(ageOrdered.map((inventor) => inventor.passed - inventor.year));
 
+    console.log(`%cExercise 6`,'display: block; font-size: 1.5rem; font-weight: bold;');
     // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
     // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
     const category = document.querySelector('.mw-category');
@@ -139,11 +145,13 @@
     console.table(de || `Can't find category`);
 
 
+    console.log(`%cExercise 7`,'display: block; font-size: 1.5rem; font-weight: bold;');
     // 7. sort Exercise
     // Sort the people alphabetically by last name
     const lastNameOrderd = people.sort((a, b) => a.split(', ')[0] > b.split(', ')[0] ? 1 : -1);
     console.table(lastNameOrderd);
 
+    console.log(`%cExercise 8`,'display: block; font-size: 1.5rem; font-weight: bold;');
     // 8. Reduce Exercise
     // Sum up the instances of each of these
     const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car',
