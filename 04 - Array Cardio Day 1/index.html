@@ -144,6 +144,20 @@
     const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car',
       'truck'
     ];
+
+    const dataCounts = data.reduce((acc, obj) => {
+      if(! acc[obj]) {
+        acc[obj] = 0;
+      }
+
+      acc[obj]++;
+
+      return acc;
+    }, {});
+
+    console.table(dataCounts);
+
+
   </script>
 </body>
 
