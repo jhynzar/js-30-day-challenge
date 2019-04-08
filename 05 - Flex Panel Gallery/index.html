@@ -30,7 +30,7 @@
     .panels {
       min-height: 100vh;
       overflow: hidden;
-      
+
       display: flex;
     }
 
@@ -158,8 +158,14 @@
   <script>
     const panels = document.querySelectorAll('.panel');
 
-    panels.forEach(panel => panel.addEventListener('click', function() { this.classList.toggle('open') }));
-    panels.forEach(panel => panel.addEventListener('transitionend', function(e) { if(e.propertyName.includes('flex')) e.target.classList.toggle('open-active') }));
+    panels.forEach(panel => panel.addEventListener('click', function () {
+      this.classList.toggle('open');
+    }));
+    panels.forEach(panel => panel.addEventListener('transitionend', function (e) {
+      if (e.propertyName.includes('flex')) {
+        e.target.classList.toggle('open-active');
+      } 
+    }));
   </script>
 
 
