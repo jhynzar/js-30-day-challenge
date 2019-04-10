@@ -10,7 +10,7 @@
 <body>
 
   <form class="search-form">
-    <input type="text" class="search" placeholder="City or State">
+    <input type="text" class="search" placeholder="Loading Places..." disabled>
     <ul class="suggestions">
       <li>Filter for a city</li>
       <li>or a state</li>
@@ -28,7 +28,11 @@
     
     fetch(endpoint)
       .then(blob => blob.json())
-      .then(data => places.push(...data));
+      .then(data => {
+        places.push(...data);
+        search.disabled = false;
+        search.placeholder = 'City or State';
+      });
 
     function numberWithCommas(x) {
       return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
