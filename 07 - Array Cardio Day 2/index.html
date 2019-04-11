@@ -51,6 +51,7 @@
       }
     ];
 
+    console.log(`%cArray.prototype.some()`,'display: block; font-size: 1.5rem; font-weight: bold;');
     // Some and Every Checks
     // Array.prototype.some() // is at least one person 19 or older?
     const isAdult = people.some(person => {
@@ -62,6 +63,7 @@
 
     console.log({isAdult});
 
+    console.log(`%cArray.prototype.every()`,'display: block; font-size: 1.5rem; font-weight: bold;');
     // Array.prototype.every() // is everyone 19 or older?
     const isAllAdult = people.every(person => {
       const currentYear = (new Date()).getFullYear();
@@ -72,6 +74,7 @@
 
     console.log({isAllAdult});
 
+    console.log(`%cArray.prototype.find()`,'display: block; font-size: 1.5rem; font-weight: bold;');
     // Array.prototype.find()
     // Find is like filter, but instead returns just the one you are looking for
     // find the comment with the ID of 823423
@@ -79,7 +82,7 @@
 
     console.table(comment);
 
-
+    console.log(`%cArray.prototype.findIndex()`,'display: block; font-size: 1.5rem; font-weight: bold;');
     // Array.prototype.findIndex()
     // Find the comment with this ID
     // delete the comment with the ID of 823423
