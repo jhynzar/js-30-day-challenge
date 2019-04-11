@@ -50,11 +50,11 @@
       }
 
       ctx.strokeStyle = `hsl(${hue}, 75%, 50%)`;
-      
+
       if(Math.trunc(ctx.lineWidth) === Math.trunc(lastWidth)){
         lastWidth = (Math.random() * (100 - 25));
       }
-      ctx.lineWidth = (lastWidth > ctx.lineWidth) ? ctx.lineWidth + ((lastWidth - ctx.lineWidth) * .1) : ctx.lineWidth - ((ctx.lineWidth - lastWidth) * .1);
+      ctx.lineWidth += ((lastWidth - ctx.lineWidth) * .1); //If lastWidth is greater, Add, else (lastWidth - ctx.lineWidth) is negative, so subtract.
 
       ctx.beginPath();
       ctx.moveTo(mouseLastX, mouseLastY);
