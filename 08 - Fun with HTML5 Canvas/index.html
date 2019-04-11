@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>HTML5 Canvas</title>
+</head>
+
+<body>
+  <canvas id="draw" width="800" height="800"></canvas>
+  <script>
+    const canvas = document.querySelector('#draw');
+    const ctx = canvas.getContext('2d');
+
+    //Set canvas to full dimensions
+    [canvas.width, canvas.height] = [window.innerWidth, window.innerHeight];
+
+    //Context default settings
+    ctx.strokeStyle = '#BADA55';
+    ctx.lineJoin = 'round';
+    ctx.lineCap = 'round';
+    ctx.lineWidth = 50;
+
+    //Variable Triggers
+    let isDrawing = false;
+    let mouseLastX = 0;
+    let mouseLastY = 0;
+    let hue = 0;
+    let lastWidth = 50;
+
+    //Helper Functions
+    function updateLastMouseCoordinates(newMouseX, newMouseY) {
+      [mouseLastX, mouseLastY] = [newMouseX, newMouseY];
+    }
+
+    //Event Listeners
+    canvas.addEventListener('mousedown', (e) => {
+      isDrawing = true;
+      updateLastMouseCoordinates(e.offsetX, e.offsetY);
+    });
+    canvas.addEventListener('mouseup', (e) => {
+      isDrawing = false;
+    });
+    canvas.addEventListener('mouseout', (e) => {
+      isDrawing = false;
+    });
+    canvas.addEventListener('mousemove', (e) => {
+      if(isDrawing === false){
+        return;
+      }
+
+      ctx.strokeStyle = `hsl(${hue}, 75%, 50%)`;
+
+      if(Math.trunc(ctx.lineWidth) === Math.trunc(lastWidth)){
+        lastWidth = (Math.random() * (100 - 25));
+      }
+      ctx.lineWidth += ((lastWidth - ctx.lineWidth) * .1); //If lastWidth is greater, Add, else (lastWidth - ctx.lineWidth) is negative, so subtract.
+
+      ctx.beginPath();
+      ctx.moveTo(mouseLastX, mouseLastY);
+      ctx.lineTo(e.offsetX, e.offsetY);
+      ctx.stroke();
+      updateLastMouseCoordinates(e.offsetX, e.offsetY);
+
+      hue++;
+    });
+  </script>
+
+  <style>
+    html, body {
+      margin: 0;
+    }
+  </style>
+
+</body>
+
+</html>
