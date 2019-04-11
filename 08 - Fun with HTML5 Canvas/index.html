@@ -9,6 +9,17 @@
 <body>
   <canvas id="draw" width="800" height="800"></canvas>
   <script>
+    const canvas = document.querySelector('#draw');
+    const ctx = canvas.getContext('2d');
+
+    //Set canvas to full dimensions
+    [canvas.width, canvas.height] = [window.innerWidth, window.innerHeight];
+
+
+    //Context default settings
+    ctx.strokeStyle = '#BADA55';
+    ctx.lineJoin = 'round';
+    ctx.lineCap = 'round';
   </script>
 
   <style>
