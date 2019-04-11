@@ -15,11 +15,43 @@
     //Set canvas to full dimensions
     [canvas.width, canvas.height] = [window.innerWidth, window.innerHeight];
 
-
     //Context default settings
     ctx.strokeStyle = '#BADA55';
     ctx.lineJoin = 'round';
     ctx.lineCap = 'round';
+
+    //Variable Triggers
+    let isDrawing = false;
+    let mouseLastX = 0;
+    let mouseLastY = 0;
+
+    //Helper Functions
+    function updateLastMouseCoordinates(newMouseX, newMouseY) {
+      [mouseLastX, mouseLastY] = [newMouseX, newMouseY];
+    }
+
+    //Event Listeners
+    canvas.addEventListener('mousedown', (e) => {
+      isDrawing = true;
+      updateLastMouseCoordinates(e.offsetX, e.offsetY);
+    });
+    canvas.addEventListener('mouseup', (e) => {
+      isDrawing = false;
+    });
+    canvas.addEventListener('mouseout', (e) => {
+      isDrawing = false;
+    });
+    canvas.addEventListener('mousemove', (e) => {
+      if(isDrawing === false){
+        return;
+      }
+
+      ctx.beginPath();
+      ctx.moveTo(mouseLastX, mouseLastY);
+      ctx.lineTo(e.offsetX, e.offsetY);
+      ctx.stroke();
+      updateLastMouseCoordinates(e.offsetX, e.offsetY);
+    });
   </script>
 
   <style>
