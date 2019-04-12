@@ -74,6 +74,23 @@
     console.groupEnd('>>> Dogs Array Group');
 
     // counting
+    /*
+      FOR CLARITY: count and countReset accepts an optional parameter <label>, the default label is 'default'
+        Sources:
+          console.count([<label>]) - https://developer.mozilla.org/en-US/docs/Web/API/Console/count
+          console.counteReset([<label>]) - https://developer.mozilla.org/en-US/docs/Web/API/Console/countReset
+    */
+    console.count();
+    console.count();
+    console.count('Awesomeness');
+    console.count('Awesomeness');
+
+    console.countReset(); // reset default count
+
+    console.countReset('Awesomeness');// reset 'Awesomeness' count
+
+    console.count();
+    console.count('Awesomeness');
 
     // timing
   </script>
