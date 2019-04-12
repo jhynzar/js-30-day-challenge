@@ -55,6 +55,23 @@
     console.dir(p);
 
     // Grouping together
+    /*
+      FOR CLARITY: Group name can be the same at the start and end of group declaration
+        <label> is not required as a parameter but it is good practice.
+        Sources:
+          console.group(<label>): https://developer.mozilla.org/en-US/docs/Web/API/Console/group
+          console.groupCollapsed(<label>): https://developer.mozilla.org/en-US/docs/Web/API/Console/groupCollapsed
+          console.groupEnd(): https://developer.mozilla.org/en-US/docs/Web/API/Console/groupEnd
+    */
+    console.groupCollapsed('>>> Dogs Array Group');
+    dogs.forEach(dog => {
+      console.group(`>> ${dog.name}`);
+
+      console.log({...dog});
+
+      console.groupEnd(`>> ${dog.name}`);
+    });
+    console.groupEnd('>>> Dogs Array Group');
 
     // counting
 
