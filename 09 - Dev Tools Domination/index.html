@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Console Tricks!</title>
+</head>
+
+<body>
+
+  <p onClick="makeGreen()">×BREAK×DOWN×</p>
+
+  <script>
+    const dogs = [{
+      name: 'Snickers',
+      age: 2
+    }, {
+      name: 'hugo',
+      age: 8
+    }];
+
+    function makeGreen() {
+      const p = document.querySelector('p');
+      p.style.color = '#BADA55';
+      p.style.fontSize = '50px';
+    }
+
+    // Regular
+    console.log('Hello World!');
+
+    // Interpolated
+    console.log('I am %s','💩');
+
+    // Styled
+    console.log('%cI am TEXT','font-size: 3rem; background-color: #BADA55; text-shadow: .1rem .1rem blue;');
+
+    // warning!
+    console.warn('Warning: Awesomeness Rising!');
+
+    // Error :|
+    console.error('Error: AWESOMENESS OVERFLOW!');
+
+    // Info
+    console.info('Info: Awesomeness, now stable');
+
+    // Testing
+    console.assert('Awesomeness' === 'stable', 'Awsomeness steadily rising!');
+
+    // clearing
+    //console.clear();
+
+    // Viewing DOM Elements
+    const p = document.querySelector('p');
+    console.log(p);
+    console.dir(p);
+
+    // Grouping together
+    /*
+      FOR CLARITY: Group name can be the same at the start and end of group declaration
+        <label> is not required as a parameter but it is good practice.
+        Sources:
+          console.group([<label>]): https://developer.mozilla.org/en-US/docs/Web/API/Console/group
+          console.groupCollapsed([<label>]): https://developer.mozilla.org/en-US/docs/Web/API/Console/groupCollapsed
+          console.groupEnd(): https://developer.mozilla.org/en-US/docs/Web/API/Console/groupEnd
+    */
+    console.groupCollapsed('>>> Dogs Array Group');
+    dogs.forEach(dog => {
+      console.group(`>> ${dog.name}`);
+
+      console.log({...dog});
+
+      console.groupEnd(`>> ${dog.name}`);
+    });
+    console.groupEnd('>>> Dogs Array Group');
+
+    // counting
+    /*
+      FOR CLARITY: count and countReset accepts an optional parameter <label>, the default label is 'default' --Tested on chrome
+        <label> is not required as a parameter but it is good practice.
+        Sources:
+          console.count([<label>]) - https://developer.mozilla.org/en-US/docs/Web/API/Console/count
+          console.counteReset([<label>]) - https://developer.mozilla.org/en-US/docs/Web/API/Console/countReset
+    */
+    console.count();
+    console.count();
+    console.count('Awesomeness');
+    console.count('Awesomeness');
+
+    console.countReset(); // reset default count
+
+    console.countReset('Awesomeness');// reset 'Awesomeness' count
+
+    console.count();
+    console.count('Awesomeness');
+
+    // timing
+    /*
+      FOR CLARITY: time and timeEnd accepts an optional parameter <label>, the default label is 'default' --Tested on chrome
+        <label> is not required as a parameter but it is good practice.
+        Sources:
+          console.count(<label>) - https://developer.mozilla.org/en-US/docs/Web/API/Console/time
+          console.counteReset(<label>) - https://developer.mozilla.org/en-US/docs/Web/API/Console/timeEnd
+    */
+    console.time('Fetching data');
+    fetch('https://api.github.com/users/wesbos')
+      .then(data => data.json())
+      .then(data => {
+        console.timeEnd('Fetching data');
+        console.log(data);
+      });
+    
+  </script>
+</body>
+
+</html>
