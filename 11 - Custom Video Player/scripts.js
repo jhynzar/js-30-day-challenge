@@ -44,7 +44,15 @@ toggle.addEventListener('click', togglePlay);
 
 skipButtons.forEach(element => element.addEventListener('click', skip));
 
-sliders.forEach(element => element.addEventListener('change', handleSliders));
+let slidersMouseDown = false
+sliders.forEach(element => {
+    element.addEventListener('mousedown', () => slidersMouseDown = true);
+    element.addEventListener('mouseup', () => slidersMouseDown = false);
+    element.addEventListener('mousemove', function() {
+        slidersMouseDown && handleSliders.apply(this);
+    });
+});
+
 
 //progress.addEventListener('click', scrub);
 
