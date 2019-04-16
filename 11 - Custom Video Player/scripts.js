@@ -20,10 +20,6 @@ function skip(){
     video.currentTime += Number(this.dataset.skip);
 }
 
-function handleSliders() {
-    video[this.name] = this.value;
-}
-
 function handleProgress() {
     const progressPercentage = (video.currentTime / video.duration) * 100;
     progressBar.style.flexBasis = `${progressPercentage}%`;
@@ -49,7 +45,9 @@ sliders.forEach(element => {
     element.addEventListener('mousedown', () => slidersMouseDown = true);
     element.addEventListener('mouseup', () => slidersMouseDown = false);
     element.addEventListener('mousemove', function() {
-        slidersMouseDown && handleSliders.apply(this);
+        if(slidersMouseDown === true) {
+            video[this.name] = this.value;
+        }
     });
 });
 
