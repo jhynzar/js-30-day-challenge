@@ -7,6 +7,18 @@
 </head>
 <body>
 <script>
+  const pressed = [];
+  const secretSequence = 'jhynzar';
+
+  window.addEventListener('keyup',(e) => {
+    pressed.push(e.key);
+    pressed.splice(-secretSequence.length - 1, pressed.length - secretSequence.length);
+    if(pressed.join('').includes(secretSequence)) {
+      console.log('BEM!');
+      cornify_add();
+    }
+    console.log(pressed);
+  });
 </script>
 </body>
 </html>
