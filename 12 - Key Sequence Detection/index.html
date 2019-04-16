@@ -11,13 +11,14 @@
   const secretSequence = 'jhynzar';
 
   window.addEventListener('keyup',(e) => {
+    console.clear();
+    console.log(pressed);
     pressed.push(e.key);
     pressed.splice(-secretSequence.length - 1, pressed.length - secretSequence.length);
     if(pressed.join('').includes(secretSequence)) {
-      console.log('BEM!');
+      console.log('%cBEM!','font-size: 3rem; background-color: #BADA55; text-shadow: .1rem .1rem blue;');
       cornify_add();
     }
-    console.log(pressed);
   });
 </script>
 </body>
