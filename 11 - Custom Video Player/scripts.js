@@ -48,7 +48,7 @@ sliders.forEach(element => element.addEventListener('change', handleSliders));
 
 //progress.addEventListener('click', scrub);
 
-let mouseDown = false;
-progress.addEventListener('mousedown', () => mouseDown = true);
-progress.addEventListener('mouseup', () => mouseDown = false);
-progress.addEventListener('mousemove', (e) => mouseDown && scrub(e));
+let progressMouseDown = false;
+progress.addEventListener('mousedown', () => progressMouseDown = true);
+progress.addEventListener('mouseup', () => progressMouseDown = false);
+progress.addEventListener('mousemove', (e) => progressMouseDown && scrub(e));
