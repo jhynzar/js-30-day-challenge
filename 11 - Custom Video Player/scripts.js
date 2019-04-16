@@ -4,6 +4,7 @@ const video = player.querySelector('.viewer');
 const toggle = player.querySelector('.toggle');
 const skipButtons = player.querySelectorAll('[data-skip]');
 const sliders = player.querySelectorAll('.player__slider');
+const progressBar = player.querySelector('.progress__filled');
 
 //Build functions
 function togglePlay() {
@@ -22,10 +23,16 @@ function handleSliders() {
     video[this.name] = this.value;
 }
 
+function handleProgress() {
+    const progressPercentage = (video.currentTime / video.duration) * 100;
+    progressBar.style.flexBasis = `${progressPercentage}%`;
+}
+
 //Bind Listeners
 video.addEventListener('click', togglePlay);
 video.addEventListener('play', updateButton);
 video.addEventListener('pause', updateButton);
+video.addEventListener('timeupdate', handleProgress);
 
 toggle.addEventListener('click', togglePlay);
 
