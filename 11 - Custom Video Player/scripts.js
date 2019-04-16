@@ -5,6 +5,7 @@ const toggle = player.querySelector('.toggle');
 const skipButtons = player.querySelectorAll('[data-skip]');
 const sliders = player.querySelectorAll('.player__slider');
 const progressBar = player.querySelector('.progress__filled');
+const progress = player.querySelector('.progress');
 
 //Build functions
 function togglePlay() {
@@ -28,6 +29,11 @@ function handleProgress() {
     progressBar.style.flexBasis = `${progressPercentage}%`;
 }
 
+function scrub(e){
+    const scrubTime = (e.offsetX / progress.offsetWidth) * video.duration;
+    video.currentTime = scrubTime;
+}
+
 //Bind Listeners
 video.addEventListener('click', togglePlay);
 video.addEventListener('play', updateButton);
@@ -39,3 +45,5 @@ toggle.addEventListener('click', togglePlay);
 skipButtons.forEach(element => element.addEventListener('click', skip));
 
 sliders.forEach(element => element.addEventListener('change', handleSliders));
+
+progress.addEventListener('click', scrub);
