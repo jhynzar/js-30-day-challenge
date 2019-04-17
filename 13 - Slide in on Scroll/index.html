@@ -61,7 +61,7 @@
     const sliderImages = document.querySelectorAll('img');
 
     
-    window.addEventListener('scroll', () => {
+    window.addEventListener('scroll', debounce(() => {
       sliderImages.forEach(sliderImage => {
         const scrollPointer = window.scrollY + window.innerHeight;
         const imageTopPositionRelativeDocument = sliderImage.getBoundingClientRect().top + window.scrollY;
@@ -78,7 +78,7 @@
           sliderImage.classList.remove('active');
         }
       });
-    })
+    }));
 
   </script>
 
