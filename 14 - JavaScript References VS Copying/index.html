@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JS Reference VS Copy</title>
+</head>
+<body>
+
+  <script>
+    // start with strings, numbers and booleans
+    console.groupCollapsed(`%cNumbers`,'display: block; font-size: 1.5rem; font-weight: bold;');
+
+    let age = 100;
+    let age2 = age;
+    console.log({age, age2});
+
+    console.log(`Run: \n%cage = 200;`,'color: red; padding: 0.25rem 0.5rem; background-color: #e5e5e5');
+    age = 200;
+    console.log({age, age2});
+
+    console.groupEnd();
+
+    console.groupCollapsed(`%cStrings`,'display: block; font-size: 1.5rem; font-weight: bold;');
+
+    let name = 'Wes';
+    let name2 = name;
+    console.log({name, name2});
+
+    console.log(`Run: \n%cname = 'wesley';`,'color: red; padding: 0.25rem 0.5rem; background-color: #e5e5e5');
+    name = 'wesley';
+    console.log({name, name2});
+
+    console.groupEnd();
+
+    console.groupCollapsed(`%cBoolean`,'display: block; font-size: 1.5rem; font-weight: bold;');
+
+    let bool1 = true;
+    let bool2 = bool1;
+    console.log({bool1, bool2});
+
+    console.log(`Run: \n%cbool1 = false;`,'color: red; padding: 0.25rem 0.5rem; background-color: #e5e5e5');
+    bool1 = false;
+    console.log({bool1, bool2});
+
+    console.groupEnd();
+
+    // Let's say we have an array
+    console.groupCollapsed(`%cArrays`,'display: block; font-size: 1.5rem; font-weight: bold;');
+
+    const players = ['Wes', 'Sarah', 'Ryan', 'Poppy'];
+
+    // and we want to make a copy of it.
+    const team = players;
+
+    console.table({players, team});
+    // You might think we can just do something like this:
+    // team[3] = 'Lux';
+
+    // however what happens when we update that array?
+
+    // now here is the problem!
+
+    // oh no - we have edited the original array too!
+
+    // Why? It's because that is an array reference, not an array copy. They both point to the same array!
+
+    // So, how do we fix this? We take a copy instead!
+    console.log(`Run: \n%cconst team2 = players.slice(); \nteam2[3] = 'Luxxana';`,'color: red; padding: 0.25rem 0.5rem; background-color: #e5e5e5');
+    const team2 = players.slice();
+    team2[3] = 'Luxxana';
+
+    // one way
+
+    // or create a new array and concat the old one in
+    console.log(`Run: \n%cconst team3 = [].concat(players); \nteam3[3] = 'Katarina';`,'color: red; padding: 0.25rem 0.5rem; background-color: #e5e5e5');
+    const team3 = [].concat(players);
+    team3[3] = 'Katarina';
+
+    // or use the new ES6 Spread
+    console.log(`Run: \n%cconst team4 = [...players]; \nteam4[3] = 'heeee hawww';`,'color: red; padding: 0.25rem 0.5rem; background-color: #e5e5e5');
+    const team4 = [...players];
+    team4[3] = 'heeee hawww';
+
+    console.log(`Run: \n%cconst team5 = Array.from(players); \nteam5[3] = 'Lulu';`,'color: red; padding: 0.25rem 0.5rem; background-color: #e5e5e5');
+    const team5 = Array.from(players);
+    team5[3] = 'Lulu';
+
+    console.table({players, team, team2, team3, team4, team5})
+
+    console.groupEnd();
+
+    // now when we update it, the original one isn't changed
+
+    // The same thing goes for objects, let's say we have a person object
+    console.groupCollapsed(`%cObjects`,'display: block; font-size: 1.5rem; font-weight: bold;');
+
+    // with Objects
+    const person = {
+      name: 'Wes Bos',
+      age: 80
+    };
+    console.table(person);
+
+    // and think we make a copy:
+    // const captain = person;
+    // captain.number = 99;
+
+    // how do we take a copy instead?
+    console.log(`Run: \n%cconst cap2 = Object.assign({}, person, { number: 99, age: 12 });`,'color: red; padding: 0.25rem 0.5rem; background-color: #e5e5e5');
+    const cap2 = Object.assign({}, person, { number: 99, age: 12 });
+    console.table({person, cap2});
+
+    // We will hopefully soon see the object ...spread
+    // const cap3 = {...person};
+
+    // Things to note - this is only 1 level deep - both for Arrays and Objects. lodash has a cloneDeep method, but you should think twice before using it.
+
+    console.warn('Things to note - this is only 1 level deep - both for Arrays and Objects. lodash has a cloneDeep method, but you should think twice before using it.');
+
+    const wes = {
+      name: 'Wes',
+      age: 100,
+      social: {
+        twitter: '@wesbos',
+        facebook: 'wesbos.developer'
+      }
+    };
+
+    console.table(wes);
+
+    console.log(`Run: \n%cconst dev = Object.assign({}, wes); \ndev.social.twitter = '@changed';`,'color: red; padding: 0.25rem 0.5rem; background-color: #e5e5e5');
+    const dev = Object.assign({}, wes);
+    dev.social.twitter = '@changed';
+
+    //for loging only
+    let wes_social = wes.social;
+    let dev_social = dev.social;
+    console.table({wes_social, dev_social});
+
+    console.warn(`For deep cloning, use the [poor man's deep clone]. Though it is not recommended since you lose the functions of that object`);
+    
+    console.log(`Run: \n%cconst dev2 = JSON.parse(JSON.stringify(wes)); \nddev2.social.twitter = '@changed';`,'color: red; padding: 0.25rem 0.5rem; background-color: #e5e5e5');
+    const dev2 = JSON.parse(JSON.stringify(wes));
+    dev2.social.twitter = '@changedForDev2';
+
+    let dev2_social = dev2.social;
+    console.table({wes_social, dev2_social});
+
+
+  </script>
+
+</body>
+</html>
