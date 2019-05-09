@@ -40,7 +40,22 @@
 
     pushAndPersist(item, items, localStorageItemName);
     populateList(items, itemsList);
-  })
+  });
+
+  itemsList.addEventListener('click', function(e) {
+    
+
+    if (!e.target.matches('input')) {
+      return;
+    }
+
+    const index = e.target.dataset.index;
+
+    items[index].done = ! items[index].done;
+
+    persist(items, localStorageItemName);
+    populateList(items, itemsList);
+  });
 
   function populateList(plates = [], platesList) {
     platesList.innerHTML = plates.map((plate, index) => {
@@ -55,6 +70,10 @@
 
   function pushAndPersist(item, collection = [], collectionName = '') {
     collection.push(item);
+    persist(collection, collectionName);
+  }
+
+  function persist(collection, collectionName) {
     localStorage.setItem(collectionName, JSON.stringify(collection));
   }
 
