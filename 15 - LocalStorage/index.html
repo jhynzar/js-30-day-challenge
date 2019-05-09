@@ -26,9 +26,11 @@
   </div>
 
 <script>
+  const localStorageItemName = 'items';
+
   const addItems = document.querySelector('.add-items');
   const itemsList = document.querySelector('.plates');
-  const items = [];
+  const items = JSON.parse(localStorage.getItem(localStorageItemName)) || [];
 
   addItems.addEventListener('submit', function(e) {
     e.preventDefault();
@@ -36,7 +38,7 @@
     item.name = this.querySelector(`input[name='item']`).value;
     item.done = false;
 
-    pushAndPersist(item, items, 'items');
+    pushAndPersist(item, items, localStorageItemName);
     populateList(items, itemsList);
   })
 
@@ -55,6 +57,9 @@
     collection.push(item);
     localStorage.setItem(collectionName, JSON.stringify(collection));
   }
+
+
+  populateList(items, itemsList);
 
 </script>
 
