@@ -183,7 +183,45 @@
       Video 58
     </li>
   </ul>
+
   <script>
+    const videos = document.querySelectorAll('.videos > li');
+
+    const totalTime = Array.from(videos).reduce((accumulator, video) => {
+      const times = video.dataset.time.split(':').map((time) => Number(time));
+      while (times.length !== 3) {
+        times.unshift(0);
+      }
+      const [hours, min, sec] = times;
+
+      accumulator.hours += hours;
+      accumulator.min += min;
+      accumulator.sec += sec;
+
+      console.log(hours, min, sec);
+
+      return accumulator;
+    }, {
+      hours: 0,
+      min: 0,
+      sec: 0,
+    });
+
+    console.log('Accumulated Time',totalTime);
+
+    //Excess Secs to Min
+    totalTime.min += Math.trunc(totalTime.sec / 60);
+    totalTime.sec = totalTime.sec % 60;
+
+    //Excess Min to Hour
+    totalTime.hours += Math.trunc(totalTime.min / 60);
+    totalTime.min = totalTime.min % 60;
+
+    console.log('Accumulated Time (Computed)',totalTime);
+
+    totalTimeString = Object.values(totalTime).map((time) => `${time}`.padStart(2,'0')).join(':');
+
+    console.log(`Total Accumulated Time (Formatted):`, totalTimeString);
   </script>
 </body>
 
