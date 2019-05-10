@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Mouse Shadow</title>
+</head>
+
+<body>
+
+  <div class="hero">
+    <h1 contenteditable>🔥WOAH!</h1>
+  </div>
+
+  <style>
+    html {
+      color: black;
+      font-family: sans-serif;
+    }
+
+    body {
+      margin: 0;
+    }
+
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: black;
+    }
+
+    h1 {
+      text-shadow: 10px 10px 0 rgba(0, 0, 0, 1);
+      font-size: 100px;
+    }
+  </style>
+
+  <script>
+    const container = document.querySelector('.hero');
+    const text = document.querySelector('h1');
+    const colors = [
+      '#FACDCD',
+      '#F8FACD',
+      '#D2FACD',
+      '#CDFAEC',
+      '#ECCDFA'
+    ];
+
+    function hover(e) {
+      const range = 25;
+      
+      const { 
+        offsetWidth: containerWidth,
+        offsetHeight: containerHeight
+      } = container;
+      
+      /**
+      Used pageX && pageY instead of
+      offsetX && offsetY to have dynamic positioning of container
+      */
+      let {
+        pageX: mouseX,
+        pageY: mouseY
+      } = e;
+      
+      /**
+      Subtract the left and top of container from mouse (pageX && pageY)
+      docs: 
+      - https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/pageX
+      - https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/pageY
+      */
+      mouseX = mouseX - container.offsetLeft;
+      mouseY = mouseY - container.offsetTop;
+      
+      shadowX = ( (mouseX / containerWidth) * range) - (range / 2);
+      shadowY = ( (mouseY / containerHeight) * range) - (range / 2);
+      
+      //Dynamic shadow colors
+      const textShadow = colors.map((color, index) => {
+        const modifier = ((index + 1) * 4);
+        return `${-shadowX * modifier}px ${-shadowY * modifier}px 0 ${color}`;
+      }).join(',');
+      
+      text.style.textShadow = textShadow;
+      // text.style.textShadow = `${-shadowX}px ${-shadowY}px 0 red`;
+    }
+
+
+    container.addEventListener('mousemove', hover);
+  </script>
+</body>
+
+</html>
