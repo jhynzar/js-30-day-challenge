@@ -233,6 +233,38 @@
   </style>
 
   <script>
+    let nav = document.querySelector('nav');
+    let dropdownBackground = document.querySelector('.dropdownBackground');
+
+
+    document.querySelectorAll('.cool > li').forEach((el) => {
+
+      el.addEventListener('mouseenter', function() {
+
+
+        this.classList.add('trigger-enter');
+        setTimeout(() => {
+          this.classList.contains('trigger-enter') && this.classList.add('trigger-enter-active');
+        }, 150);
+
+        let dropdownRect = this.querySelector('.dropdown').getBoundingClientRect();
+
+        dropdownBackground.style.setProperty('width', `${dropdownRect.width}px`);
+        dropdownBackground.style.setProperty('height', `${dropdownRect.height}px`);
+        dropdownBackground.style.setProperty('transform', `translate(${dropdownRect.left - nav.offsetLeft}px,${dropdownRect.top - nav.offsetTop}px)`);
+
+        dropdownBackground.classList.add('open');
+
+      });
+
+      el.addEventListener('mouseleave', function() {
+
+        this.classList.remove('trigger-enter');
+        this.classList.remove('trigger-enter-active');
+
+        dropdownBackground.classList.remove('open');
+      });
+    });
   </script>
 
 </body>
